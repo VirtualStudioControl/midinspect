@@ -119,6 +119,7 @@ class MainWindow(QMainWindow):
         if (control != 0xC0) and (control != 0xD0):
             msg.append(data2)
 
+        self.midiOut.send_message(msg)
         self.appendMessage(msg, 0, isIncoming=False)
 
     #region Message Generation
@@ -135,7 +136,6 @@ class MainWindow(QMainWindow):
         msg = "[{delta:.6F}] {control:>16} channel={channel:02d} data={data1:03d} {data2:03d}".format(delta=deltaTime, control=self.CONTROL_LUT[message[0] & 0xF0], channel=(message[0] & 0x0F),
                          data1=message[1]&0xff, data2=message[2]&0xff)
 
-        self.midiOut.send_message(message)
         self.addMessageToWidget(msg, isIncoming)
 
     def addMessageToWidget(self, message, isIncoming: bool):
