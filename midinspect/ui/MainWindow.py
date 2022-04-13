@@ -81,10 +81,10 @@ class MainWindow(QMainWindow):
 
     def openMIDI(self):
         self.midiOut = rtmidi.MidiOut()
-        self.midiOut.open_port(1)
+        self.midiOut.open_port(2)
 
         self.midiIn = rtmidi.MidiIn()
-        self.midiIn.open_port(0)
+        self.midiIn.open_port(1)
 
         self.midiIn.set_callback(InputEventHandler(self.appendMessage))
         self.isOpen = True
